@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Brand palette ── */
+  --color-ink: #0a1a0f;
+  --color-forest: #0f2d1a;
+  --color-moss: #1a4428;
+  --color-sage: #2d6a4f;
+  --color-gold: #c8963e;
+  --color-amber: #e4b45a;
+  --color-cream: #f5efe0;
+  --color-parchment: #ede3cc;
+  --color-muted: #8a9e8f;
+
+  /* ── Fonts (wired from next/font in layout.tsx) ── */
+  --font-display: var(--font-fraunces), "Cormorant Garamond", serif;
+  --font-body: var(--font-dm-sans), "Outfit", sans-serif;
+  --font-mono: var(--font-dm-mono), monospace;
+
+  /* ── Easing ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* ── Subtle film-grain overlay for that "premium journal" feel ── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.28;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-moss);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sage);
+}
+
+/* ── Reusable utilities ── */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass-nav {
+    background: rgba(10, 26, 15, 0.72);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #e4b45a 0%, #c8963e 100%);
+  }
+
+  .gold-text {
+    background: linear-gradient(135deg, #e4b45a 0%, #c8963e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .ring-gold-focus:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(200, 150, 62, 0.45);
+  }
+
+  .hero-glow::before {
+    content: "";
+    position: absolute;
+    width: 900px;
+    height: 900px;
+    top: -10%;
+    right: -20%;
+    background: radial-gradient(
+      circle,
+      rgba(45, 106, 79, 0.22) 0%,
+      transparent 65%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* ── Animations ── */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2.4s ease-out infinite;
+}
+
+@keyframes float-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-float-up {
+  animation: float-up 0.7s var(--ease-out-expo) both;
+}
+
+@keyframes count-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
