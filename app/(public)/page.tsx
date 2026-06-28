@@ -2,6 +2,7 @@ import { Hero } from "@/components/landing/Hero";
 import { ProofMarquee } from "@/components/landing/ProofMarquee";
 import { WhyBioMonk } from "@/components/landing/WhyBioMonk";
 import { FreeVsPaid } from "@/components/landing/FreeVsPaid";
+import { Resources } from "@/components/landing/Resources";
 import { FeaturedCourses } from "@/components/landing/FeaturedCourses";
 import { PredictorCtaBand } from "@/components/landing/PredictorCtaBand";
 import { HallOfFame } from "@/components/landing/HallOfFame";
@@ -17,6 +18,7 @@ export default function HomePage() {
       <ProofMarquee />
       <WhyBioMonk />
       <FreeVsPaid />
+      <Resources />
       <FeaturedCourses />
       <PredictorCtaBand />
       <HallOfFame limit={6} showViewAll heading="Your seniors did it here" />

@@ -1,16 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Brand palette ── */
-  --color-ink: #0a1a0f;
-  --color-forest: #0f2d1a;
-  --color-moss: #1a4428;
-  --color-sage: #2d6a4f;
-  --color-gold: #c8963e;
-  --color-amber: #e4b45a;
-  --color-cream: #f5efe0;
-  --color-parchment: #ede3cc;
-  --color-muted: #8a9e8f;
+  /* ── Brand palette — white base + BioMonk violet (sampled from logo) ──
+     Tokens keep their original semantic roles (bg → text) but are remapped
+     to a light theme so the whole site flips coherently:
+       ink       → base/page background (white) + text-on-accent
+       forest    → soft lavender section tint
+       moss       → hairline borders / subtle surfaces
+       sage      → mid-violet decorative accent
+       gold      → primary brand violet (accent text, icons, gradient end)
+       amber     → secondary violet accent (a touch brighter)
+       cream     → deepest violet — headings & primary text
+       parchment → muted violet — body copy
+       muted     → faint violet-grey — captions/footnotes            */
+  --color-white: #ffffff;
+  --color-ink: #ffffff;
+  --color-forest: #f7f1fd;
+  --color-moss: #e9dcf7;
+  --color-sage: #a675ca; /* light purple highlight */
+  --color-gold: #5a009d; /* primary */
+  --color-amber: #9800e6; /* bright accent */
+  --color-cream: #2b0048; /* deepest violet — headings & primary text */
+  --color-parchment: #574170; /* muted violet — body copy */
+  --color-muted: #8b7aa3; /* faint violet-grey — captions */
 
   /* ── Fonts (wired from next/font in layout.tsx) ── */
   --font-display: var(--font-fraunces), "Cormorant Garamond", serif;
@@ -22,7 +34,7 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
@@ -45,7 +57,7 @@ body::before {
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.28;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 }
 
@@ -63,11 +75,11 @@ body::before {
   background: var(--color-ink);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-moss);
+  background: var(--color-sage);
   border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-sage);
+  background: var(--color-gold);
 }
 
 /* ── Reusable utilities ── */
@@ -84,17 +96,17 @@ body::before {
   }
 
   .glass-nav {
-    background: rgba(10, 26, 15, 0.72);
+    background: rgba(255, 255, 255, 0.78);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
   }
 
   .gold-gradient {
-    background: linear-gradient(135deg, #e4b45a 0%, #c8963e 100%);
+    background: linear-gradient(135deg, #9800e6 0%, #7a00c4 50%, #5a009d 100%);
   }
 
   .gold-text {
-    background: linear-gradient(135deg, #e4b45a 0%, #c8963e 100%);
+    background: linear-gradient(135deg, #9800e6 0%, #5a009d 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -102,7 +114,7 @@ body::before {
 
   .ring-gold-focus:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(200, 150, 62, 0.45);
+    box-shadow: 0 0 0 3px rgba(90, 0, 157, 0.45);
   }
 
   .hero-glow::before {
@@ -114,7 +126,7 @@ body::before {
     right: -20%;
     background: radial-gradient(
       circle,
-      rgba(45, 106, 79, 0.22) 0%,
+      rgba(122, 0, 196, 0.13) 0%,
       transparent 65%
     );
     pointer-events: none;

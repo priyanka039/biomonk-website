@@ -16,7 +16,7 @@ interface LeadDialogProps {
 }
 
 const triggerBase =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-all duration-200 ring-gold-focus h-12 px-6 text-[15px] gold-gradient text-ink shadow-[0_8px_30px_-8px_rgba(200,150,62,0.6)] hover:-translate-y-0.5";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-tight transition-all duration-200 ring-gold-focus h-12 px-6 text-[15px] gold-gradient text-ink shadow-[0_8px_30px_-8px_rgba(90,0,157,0.6)] hover:-translate-y-0.5";
 
 export function LeadDialog({
   triggerLabel,

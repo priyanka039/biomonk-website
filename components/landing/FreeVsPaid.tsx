@@ -63,7 +63,7 @@ export function FreeVsPaid() {
         </div>
 
         {/* Paid */}
-        <div className="relative flex flex-col overflow-hidden rounded-3xl border border-gold/50 bg-gradient-to-b from-moss/40 to-forest p-7 shadow-[0_24px_60px_-30px_rgba(200,150,62,0.5)]">
+        <div className="relative flex flex-col overflow-hidden rounded-3xl border border-gold/50 bg-gradient-to-b from-moss/40 to-forest p-7 shadow-[0_24px_60px_-30px_rgba(90,0,157,0.5)]">
           <div className="absolute right-0 top-0 rounded-bl-2xl gold-gradient px-4 py-1.5 text-xs font-bold text-ink">
             Most Popular
           </div>

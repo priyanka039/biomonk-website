@@ -11,18 +11,18 @@ export function CourseCard({ course }: { course: Course }) {
   return (
     <Link
       href={`/courses/${course.slug}`}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-moss bg-forest transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_20px_50px_-20px_rgba(200,150,62,0.4)]"
+      className="group flex flex-col overflow-hidden rounded-2xl border border-moss bg-forest transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_20px_50px_-20px_rgba(90,0,157,0.4)]"
     >
-      <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-moss via-forest to-ink">
-        <span className="font-display text-5xl font-semibold text-sage/40">
+      <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-sage/30 via-forest to-moss">
+        <span className="font-display text-5xl font-semibold gold-text opacity-40">
           Bio
         </span>
         {course.badge && (
-          <span className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-ink">
+          <span className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-white">
             {course.badge}
           </span>
         )}
-        <span className="absolute right-3 top-3 rounded-full bg-ink/70 px-2.5 py-1 text-xs font-medium text-amber">
+        <span className="absolute right-3 top-3 rounded-full border border-moss bg-white/85 px-2.5 py-1 text-xs font-medium text-gold backdrop-blur">
           {course.categoryLabel}
         </span>
       </div>

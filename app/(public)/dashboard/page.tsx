@@ -6,10 +6,12 @@ import {
   BarChart3,
   FileText,
   Flame,
+  BookMarked,
   ArrowUpRight,
 } from "lucide-react";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { CtaButton } from "@/components/shared/CtaButton";
+import { BrowserFrame } from "@/components/shared/BrowserFrame";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -29,6 +31,11 @@ const FEATURES = [
     icon: ClipboardCheck,
     title: "Test Series",
     desc: "Chapter-wise and full-length mock tests with instant analysis and a motivating leaderboard.",
+  },
+  {
+    icon: BookMarked,
+    title: "Error Book",
+    desc: "Every wrong answer is auto-saved to your Error Book — review and fix your mistakes before NEET.",
   },
   {
     icon: BarChart3,
@@ -75,8 +82,8 @@ export default function DashboardShowcasePage() {
           </div>
         </div>
 
-        {/* Mock dashboard preview */}
-        <DashboardPreview />
+        {/* Real LMS preview */}
+        <LmsShowcase />
       </div>
 
       <div className="mt-16">
@@ -117,59 +124,26 @@ export default function DashboardShowcasePage() {
   );
 }
 
-function DashboardPreview() {
+function LmsShowcase() {
   return (
-    <div className="rounded-3xl border border-moss bg-forest p-4 shadow-[0_24px_60px_-30px_rgba(0,0,0,0.8)]">
-      <div className="rounded-2xl bg-ink p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-xs text-muted">Welcome back,</p>
-            <p className="font-display text-lg font-semibold text-cream">
-              Priya 👋
-            </p>
-          </div>
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-sage to-moss text-sm font-semibold text-cream">
-            P
-          </div>
-        </div>
-
-        <div className="mt-4 rounded-xl border border-moss bg-forest/60 p-4">
-          <div className="flex items-center justify-between text-xs">
-            <span className="text-parchment">Dropper Batch 2026</span>
-            <span className="text-gold">68%</span>
-          </div>
-          <div className="mt-2 h-2 overflow-hidden rounded-full bg-ink">
-            <div className="h-full w-[68%] gold-gradient" />
-          </div>
-        </div>
-
-        <div className="mt-4 grid grid-cols-3 gap-3">
-          {[
-            { v: "218", l: "Lessons" },
-            { v: "34", l: "Tests" },
-            { v: "12🔥", l: "Streak" },
-          ].map((s) => (
-            <div
-              key={s.l}
-              className="rounded-xl border border-moss bg-forest/60 p-3 text-center"
-            >
-              <div className="font-display text-xl font-semibold text-cream">
-                {s.v}
-              </div>
-              <div className="text-[10px] text-muted">{s.l}</div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-4 flex items-center gap-3 rounded-xl border border-gold/30 bg-gold/5 p-3">
-          <PlayCircle size={28} className="text-gold" />
-          <div className="text-xs">
-            <p className="text-muted">Up next</p>
-            <p className="font-medium text-cream">
-              Molecular Basis of Inheritance
-            </p>
-          </div>
-        </div>
+    <div className="relative mx-auto w-full max-w-xl">
+      <div
+        aria-hidden
+        className="absolute -inset-5 -z-10 rounded-[2.25rem] gold-gradient opacity-[0.12] blur-2xl"
+      />
+      <BrowserFrame
+        url="app.biomonk.in/dashboard"
+        src="/lms-dashboard.png"
+        alt="BioMonk student dashboard — Error Book, progress and analytics"
+        priority
+      />
+      <div className="absolute -bottom-10 -left-3 hidden w-48 -rotate-[5deg] sm:block lg:-left-10 lg:w-60">
+        <BrowserFrame
+          url="app.biomonk.in/schedule"
+          src="/lms-schedule.png"
+          alt="BioMonk Champion's Batch — today's live schedule"
+          compact
+        />
       </div>
     </div>
   );

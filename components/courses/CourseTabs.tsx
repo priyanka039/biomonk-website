@@ -123,7 +123,7 @@ function Curriculum({ course }: { course: Course }) {
 function Faculty() {
   return (
     <div className="flex flex-col gap-5 rounded-2xl border border-moss bg-forest/50 p-6 sm:flex-row sm:items-center">
-      <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sage to-moss font-display text-3xl font-semibold text-cream">
+      <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-2xl gold-gradient font-display text-3xl font-semibold text-white shadow-[0_10px_30px_-10px_rgba(90,0,157,0.7)]">
         VV
       </div>
       <div>

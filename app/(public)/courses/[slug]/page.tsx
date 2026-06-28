@@ -94,7 +94,7 @@ export default async function CourseDetailPage({
 
         {/* Sticky sidebar */}
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-3xl border border-gold/30 bg-forest p-6 shadow-[0_24px_60px_-30px_rgba(200,150,62,0.5)]">
+          <div className="rounded-3xl border border-gold/30 bg-forest p-6 shadow-[0_24px_60px_-30px_rgba(90,0,157,0.5)]">
             <div className="flex items-baseline gap-3">
               <span className="font-display text-4xl font-semibold text-cream">
                 {formatINR(course.salePrice)}

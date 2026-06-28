@@ -12,7 +12,7 @@ export function TopperCard({ topper }: { topper: TopperResult }) {
   return (
     <div className="flex flex-col rounded-2xl border border-moss bg-forest p-5 transition-colors hover:border-gold/50">
       <div className="flex items-center gap-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-sage to-moss font-semibold text-cream">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full gold-gradient font-semibold text-white shadow-[0_6px_18px_-6px_rgba(90,0,157,0.7)]">
           {initials}
         </div>
         <div>

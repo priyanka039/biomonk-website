@@ -1,10 +1,11 @@
+import Image from "next/image";
 import { Trophy, BarChart3, Target } from "lucide-react";
 import { CtaButton } from "@/components/shared/CtaButton";
 
 export function Hero() {
   return (
     <section className="hero-glow relative overflow-hidden">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-14 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:pb-24 lg:pt-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 pb-16 pt-14 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 lg:pb-24 lg:pt-20">
         {/* Left — text */}
         <div className="relative z-10">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-medium text-amber">
@@ -47,30 +48,36 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right — portrait + floating result cards */}
-        <div className="relative z-10 mx-auto w-full max-w-sm lg:max-w-none">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-moss bg-gradient-to-b from-moss/60 via-forest to-ink">
-            <div className="absolute inset-0 flex items-end justify-center">
-              <span className="font-display text-[10rem] font-semibold leading-none text-sage/20">
-                VV
-              </span>
-            </div>
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink to-transparent p-5">
-              <p className="font-display text-xl text-cream">Vicky Vaswani</p>
-              <p className="text-xs text-amber">Founder &amp; Lead Mentor</p>
-            </div>
+        {/* Right — real mentor portrait on a brand gradient disc */}
+        <div className="relative z-10 mx-auto w-full max-w-sm lg:max-w-md">
+          <div className="relative flex justify-center">
+            <div
+              aria-hidden
+              className="absolute bottom-3 left-1/2 h-[80%] w-[80%] -translate-x-1/2 rounded-full bg-gradient-to-b from-amber to-gold"
+            />
+            <div
+              aria-hidden
+              className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full gold-gradient opacity-25 blur-3xl"
+            />
+            <Image
+              src="/vicky.png"
+              alt="Vicky Vaswani — Founder & Lead Mentor at BioMonk"
+              width={616}
+              height={849}
+              priority
+              unoptimized
+              className="relative z-10 w-[82%] max-w-[20rem] [mask-image:linear-gradient(to_bottom,black_84%,transparent)] drop-shadow-[0_24px_45px_rgba(90,0,157,0.4)]"
+            />
           </div>
 
-          <FloatCard
-            className="-left-3 top-8 sm:-left-6"
-            air="AIR 47"
-            detail="NEET 2023 · Mehak S."
-          />
-          <FloatCard
-            className="-right-3 bottom-16 sm:-right-6"
-            air="AIR 112"
-            detail="NEET 2024 · Rohit K."
-          />
+          <div className="relative z-20 mx-auto -mt-2 w-max rounded-full border border-moss bg-white/90 px-5 py-2 text-center shadow-[0_14px_34px_-14px_rgba(90,0,157,0.5)] backdrop-blur">
+            <p className="font-display text-sm font-semibold text-cream">
+              Vicky Vaswani
+            </p>
+            <p className="text-[11px] font-medium text-gold">
+              Founder &amp; Lead Mentor
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -92,21 +99,3 @@ function ProofChip({
   );
 }
 
-function FloatCard({
-  className,
-  air,
-  detail,
-}: {
-  className: string;
-  air: string;
-  detail: string;
-}) {
-  return (
-    <div
-      className={`absolute z-20 animate-float-up rounded-2xl border border-gold/40 bg-forest/95 px-4 py-3 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.7)] backdrop-blur ${className}`}
-    >
-      <p className="font-display text-xl font-semibold text-gold">{air}</p>
-      <p className="font-mono text-[11px] text-parchment/80">{detail}</p>
-    </div>
-  );
-}

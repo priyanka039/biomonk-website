@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { CtaButton } from "@/components/shared/CtaButton";
 
@@ -13,11 +14,24 @@ export function VickyStory() {
   return (
     <section className="border-y border-moss/60 bg-forest/30">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-moss bg-gradient-to-b from-moss/60 via-forest to-ink">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-[9rem] font-semibold leading-none text-sage/20">
-              VV
-            </span>
+        <div className="relative mx-auto w-full max-w-sm">
+          <div className="relative flex justify-center">
+            <div
+              aria-hidden
+              className="absolute bottom-3 left-1/2 h-[84%] w-[84%] -translate-x-1/2 rounded-full bg-gradient-to-b from-amber to-gold"
+            />
+            <div
+              aria-hidden
+              className="absolute bottom-0 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full gold-gradient opacity-20 blur-3xl"
+            />
+            <Image
+              src="/vicky.png"
+              alt="Vicky Vaswani — Founder & Lead Mentor at BioMonk"
+              width={614}
+              height={849}
+              unoptimized
+              className="relative z-10 w-[82%] max-w-[18rem] [mask-image:linear-gradient(to_bottom,black_85%,transparent)] drop-shadow-[0_22px_45px_rgba(90,0,157,0.4)]"
+            />
           </div>
         </div>
 

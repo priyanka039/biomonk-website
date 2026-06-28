@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function SectionLabel({
@@ -22,13 +23,14 @@ export function SectionLabel({
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <span
-      className={cn(
-        "font-display text-2xl font-semibold tracking-tight text-cream",
-        className
-      )}
-    >
-      Bio<span className="gold-text">Monk</span>
-    </span>
+    <Image
+      src="/logo.png"
+      alt="BioMonk"
+      width={945}
+      height={189}
+      priority
+      unoptimized
+      className={cn("h-8 w-auto", className)}
+    />
   );
 }
