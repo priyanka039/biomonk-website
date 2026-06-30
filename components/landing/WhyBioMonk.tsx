@@ -43,31 +43,33 @@ const FEATURES = [
 
 export function WhyBioMonk() {
   return (
-    <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
-      <div className="max-w-2xl">
-        <SectionLabel>Why BioMonk</SectionLabel>
-        <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-cream sm:text-5xl text-balance">
-          A mentor in your corner — not a coaching factory
-        </h2>
-      </div>
+    <section className="border-y border-moss bg-forest/50 py-20">
+      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+        <div className="max-w-2xl">
+          <SectionLabel>Why BioMonk</SectionLabel>
+          <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-cream sm:text-5xl text-balance">
+            A mentor in your corner — not a coaching factory
+          </h2>
+        </div>
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {FEATURES.map((f) => (
-          <div
-            key={f.title}
-            className="group rounded-2xl border border-moss bg-forest/60 p-6 transition-colors hover:border-gold/50"
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold/20">
-              <f.icon size={24} />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURES.map((f) => (
+            <div
+              key={f.title}
+              className="group rounded-2xl border border-moss bg-white p-6 transition-all duration-200 hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_20px_50px_-30px_rgba(90,24,154,0.5)]"
+            >
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/10 text-gold transition-colors group-hover:bg-gold/20">
+                <f.icon size={24} />
+              </div>
+              <h3 className="mt-5 font-display text-xl font-semibold text-cream">
+                {f.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-parchment/70">
+                {f.desc}
+              </p>
             </div>
-            <h3 className="mt-5 font-display text-xl font-semibold text-cream">
-              {f.title}
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-parchment/70">
-              {f.desc}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

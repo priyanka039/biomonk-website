@@ -28,7 +28,20 @@ export const siteConfig = {
     toppers: "23",
     aiimsSelections: "6",
   },
+  // NEET 2027 is expected on the first Sunday of May. Update when NTA confirms.
+  neetDate: process.env.NEXT_PUBLIC_NEET_DATE || "2027-05-02",
+  // Honest scarcity: real number of mentor-connect slots open this month.
+  mentorSeatsLeft: Number(process.env.NEXT_PUBLIC_MENTOR_SEATS ?? 8),
 };
+
+/**
+ * Whole days remaining until the NEET exam date (>= 0).
+ */
+export function daysToNeet(from: Date = new Date()): number {
+  const target = new Date(`${siteConfig.neetDate}T00:00:00`);
+  const ms = target.getTime() - from.getTime();
+  return Math.max(0, Math.ceil(ms / 86_400_000));
+}
 
 /**
  * Build a wa.me deep link with a pre-filled message.

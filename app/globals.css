@@ -14,15 +14,23 @@
        parchment → muted violet — body copy
        muted     → faint violet-grey — captions/footnotes            */
   --color-white: #ffffff; /* kept pure — cards/surfaces pop on the tinted page */
-  --color-ink: #f6f3fc; /* base/page background — soft violet-white (not stark) */
-  --color-forest: #ece4fa; /* deeper lavender — tinted section bands & surfaces */
-  --color-moss: #e3d6f6;
-  --color-sage: #a675ca; /* light purple highlight */
-  --color-gold: #5a009d; /* primary */
-  --color-amber: #9800e6; /* bright accent */
-  --color-cream: #2b0048; /* deepest violet — headings & primary text */
-  --color-parchment: #574170; /* muted violet — body copy */
-  --color-muted: #8b7aa3; /* faint violet-grey — captions */
+  --color-ink: #faf6ff; /* base/page background — soft violet-white (not stark) */
+  --color-forest: #f1e6ff; /* light lavender — tinted section bands & surfaces */
+  --color-moss: #e6d4fb; /* hairline borders / subtle surfaces */
+  --color-sage: #c77dff; /* light orchid — decorative highlight */
+  --color-gold: #5a189a; /* primary brand violet */
+  --color-amber: #9d4edd; /* bright orchid accent */
+  --color-cream: #240046; /* deepest violet — headings & primary text */
+  --color-parchment: #4a366e; /* muted violet — body copy */
+  --color-muted: #8a78a8; /* faint violet-grey — captions */
+
+  /* Extra ramp steps (Coolors purple scale) for depth & variety —
+     used for dramatic dark bands, mid accents, and pale tints. */
+  --color-deep: #240046; /* darkest band background */
+  --color-deep2: #3c096c; /* dark band gradient partner */
+  --color-grape: #7b2cbf; /* mid vibrant accent */
+  --color-lilac: #c77dff; /* light orchid (on dark) */
+  --color-petal: #e0aaff; /* palest lavender (text on dark) */
 
   /* ── Fonts (wired from next/font in layout.tsx) ── */
   --font-display: var(--font-fraunces), "Cormorant Garamond", serif;
@@ -97,85 +105,68 @@ body::before {
   }
 
   .glass-nav {
-    background: rgba(249, 247, 253, 0.82);
+    background: rgba(250, 246, 255, 0.82);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
   }
 
   .gold-gradient {
-    background: linear-gradient(135deg, #9800e6 0%, #7a00c4 50%, #5a009d 100%);
+    background: linear-gradient(135deg, #9d4edd 0%, #7b2cbf 50%, #5a189a 100%);
   }
 
   .gold-text {
-    background: linear-gradient(135deg, #9800e6 0%, #5a009d 100%);
+    background: linear-gradient(135deg, #9d4edd 0%, #5a189a 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  .ring-gold-focus:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(90, 0, 157, 0.45);
+  /* Deep band gradient for dramatic, dark feature sections. */
+  .deep-gradient {
+    background: linear-gradient(150deg, #240046 0%, #3c096c 55%, #240046 100%);
   }
 
-  /* ── Drifting lavender mist (background ambience) ──
-     Design rule: a *balanced ambient field* of constant luminance.
-       • One blob anchored per viewport quadrant → even coverage everywhere.
-       • Uniform size + fixed per-blob opacity → no region reads heavier.
-       • Only position/scale drift animates (never opacity) → the overall
-         mist density stays steady; it moves but never pulses brighter/dimmer.
-       • Shared easing + staggered phases → reads as one cohesive field.   */
-  .mist {
+  .ring-gold-focus:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(123, 44, 191, 0.5);
+  }
+
+  /* ── Lavender mist (background ambience) ──
+     Design rule: a *uniform full-bleed field*, never patches.
+       • Two oversized full-screen gradient layers (no positioned blobs) so
+         density is even everywhere — corners and centre read the same.
+       • Motion is a slow background-position pan (not moving bright blobs),
+         so the wash drifts subtly while staying uniform at every moment.
+       • Low-contrast brand violets + heavy blur keep it as ambience.       */
+  .mist-field {
     position: absolute;
-    width: 44vw;
-    height: 44vw;
-    border-radius: 9999px;
-    filter: blur(80px);
-    will-change: transform;
+    inset: -25%;
+    background-size: 200% 200%;
+    filter: blur(40px);
+    will-change: background-position;
   }
-  /* top-left quadrant */
-  .mist-1 {
-    top: -6vh;
-    left: -4vw;
-    background: radial-gradient(
-      circle,
-      rgba(152, 0, 230, 0.16) 0%,
-      transparent 70%
-    );
-    animation: mist-drift 36s var(--ease-mist) infinite alternate;
+  .mist-field-a {
+    background-image: radial-gradient(
+        130% 130% at 50% 40%,
+        rgba(157, 78, 221, 0.07) 0%,
+        transparent 60%
+      ),
+      linear-gradient(
+        120deg,
+        rgba(123, 44, 191, 0.08) 0%,
+        rgba(199, 125, 255, 0.05) 50%,
+        rgba(90, 24, 154, 0.08) 100%
+      );
+    animation: mist-pan 42s var(--ease-mist) infinite alternate;
   }
-  /* top-right quadrant */
-  .mist-2 {
-    top: -4vh;
-    right: -4vw;
-    background: radial-gradient(
-      circle,
-      rgba(122, 0, 196, 0.16) 0%,
-      transparent 70%
+  .mist-field-b {
+    background-image: linear-gradient(
+      300deg,
+      rgba(199, 125, 255, 0.07) 0%,
+      transparent 45%,
+      rgba(157, 78, 221, 0.06) 100%
     );
-    animation: mist-drift 40s var(--ease-mist) -8s infinite alternate-reverse;
-  }
-  /* bottom-left quadrant */
-  .mist-3 {
-    bottom: -6vh;
-    left: -2vw;
-    background: radial-gradient(
-      circle,
-      rgba(90, 0, 157, 0.15) 0%,
-      transparent 70%
-    );
-    animation: mist-drift 44s var(--ease-mist) -16s infinite alternate-reverse;
-  }
-  /* bottom-right quadrant */
-  .mist-4 {
-    bottom: -4vh;
-    right: -2vw;
-    background: radial-gradient(
-      circle,
-      rgba(166, 117, 202, 0.16) 0%,
-      transparent 70%
-    );
-    animation: mist-drift 48s var(--ease-mist) -24s infinite alternate;
+    animation: mist-pan-rev 58s var(--ease-mist) infinite alternate;
   }
 
   .hero-glow::before {
@@ -187,7 +178,7 @@ body::before {
     right: -20%;
     background: radial-gradient(
       circle,
-      rgba(122, 0, 196, 0.13) 0%,
+      rgba(157, 78, 221, 0.15) 0%,
       transparent 65%
     );
     pointer-events: none;
@@ -208,15 +199,22 @@ body::before {
   animation: marquee 32s linear infinite;
 }
 
-/* Single shared drift: gentle position + scale only (no opacity change),
-   so the overall mist luminance stays constant. Per-blob direction is
-   varied via alternate / alternate-reverse + staggered delays above. */
-@keyframes mist-drift {
+/* Slow background-position pan keeps the wash uniform while it drifts —
+   no bright moving blobs, so density stays even across the whole page. */
+@keyframes mist-pan {
   0% {
-    transform: translate3d(0, 0, 0) scale(1);
+    background-position: 0% 50%;
   }
   100% {
-    transform: translate3d(6vw, 5vh, 0) scale(1.08);
+    background-position: 100% 50%;
+  }
+}
+@keyframes mist-pan-rev {
+  0% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
   }
 }
 

@@ -64,6 +64,36 @@ const LMS_FEATURES = [
   { label: "Live doubt-solving sessions", bold: false },
 ];
 
+// Stylised "page" previews so students can see the material before downloading.
+// Swap `lines` for real scanned images in /public when they're ready.
+const PREVIEWS = [
+  {
+    kind: "Quick Notes",
+    chapter: "Cell: The Unit of Life",
+    lines: ["Prokaryotic vs Eukaryotic", "Cell membrane — fluid mosaic", "Mitochondria · Plastids", "Endomembrane system"],
+  },
+  {
+    kind: "Mind Map",
+    chapter: "Human Physiology",
+    lines: ["Digestion → Absorption", "Breathing & gas exchange", "Circulation · double pump", "Neural coordination"],
+  },
+  {
+    kind: "PYQ Set",
+    chapter: "Genetics & Evolution",
+    lines: ["Mendel — 9:3:3:1", "Linkage & recombination", "Hardy–Weinberg", "Molecular basis"],
+  },
+  {
+    kind: "Diagram Sheet",
+    chapter: "Plant Physiology",
+    lines: ["C3 vs C4 pathway", "Light & dark reactions", "Transpiration pull", "Mineral nutrition"],
+  },
+  {
+    kind: "DPP Sample",
+    chapter: "Reproduction",
+    lines: ["Flowering plants", "Human reproduction", "Reproductive health", "Practice MCQs ×25"],
+  },
+];
+
 export function Resources() {
   return (
     <section
@@ -106,6 +136,57 @@ export function Resources() {
               </a>
             </div>
           ))}
+        </div>
+
+        {/* Look inside: a swipeable peek at the material before downloading */}
+        <div className="mt-16">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h3 className="font-display text-2xl font-semibold text-cream sm:text-3xl">
+                Look inside the material
+              </h3>
+              <p className="mt-1.5 text-sm text-parchment/70">
+                Real, exam-ready pages — not typed filler. Swipe to flip through.
+              </p>
+            </div>
+            <span className="hidden shrink-0 text-xs text-muted sm:block">
+              Swipe →
+            </span>
+          </div>
+
+          <div className="mt-6 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {PREVIEWS.map((p) => (
+              <article
+                key={p.chapter}
+                className="group relative w-[230px] shrink-0 snap-start overflow-hidden rounded-2xl border border-moss bg-white p-5 shadow-[0_18px_45px_-30px_rgba(90,0,157,0.5)] transition-transform duration-200 hover:-translate-y-1 sm:w-[260px]"
+              >
+                <span className="absolute right-3 top-3 rounded-full bg-gold/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-gold">
+                  Sample
+                </span>
+                <span className="text-xs font-semibold uppercase tracking-wide text-sage">
+                  {p.kind}
+                </span>
+                <h4 className="mt-1 font-display text-lg font-semibold leading-snug text-cream">
+                  {p.chapter}
+                </h4>
+                <ul className="mt-4 space-y-2.5">
+                  {p.lines.map((line) => (
+                    <li
+                      key={line}
+                      className="flex items-center gap-2 text-[13px] text-parchment/80"
+                    >
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold/50" />
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-white to-transparent"
+                />
+              </article>
+            ))}
+          </div>
         </div>
 
         {/* Strategic free → paid upsell: the LMS as the natural next step */}

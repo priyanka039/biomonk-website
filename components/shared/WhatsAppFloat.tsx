@@ -9,7 +9,7 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Chat with ${siteConfig.name} on WhatsApp`}
-      className="group fixed bottom-5 right-5 z-[900] flex items-center gap-3"
+      className="group fixed bottom-24 right-5 z-[900] flex items-center gap-3 sm:bottom-5"
     >
       <span className="pointer-events-none hidden rounded-full border border-moss bg-forest/95 px-4 py-2 text-sm font-medium text-cream shadow-lg backdrop-blur transition-opacity group-hover:opacity-100 sm:block sm:opacity-0">
         Chat with Vicky Sir
