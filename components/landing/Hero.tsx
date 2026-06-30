@@ -26,7 +26,7 @@ export function Hero() {
 
           <div className="mt-7 flex flex-wrap gap-3">
             <ProofChip icon={<Trophy size={15} />}>
-              Ex-Allen · Ex-Aakash · Ex-PW
+              Ex-Senior Faculty, Top Institutes
             </ProofChip>
             <ProofChip icon={<BarChart3 size={15} />}>16+ Years</ProofChip>
             <ProofChip icon={<Target size={15} />}>

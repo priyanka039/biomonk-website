@@ -66,7 +66,10 @@ const LMS_FEATURES = [
 
 export function Resources() {
   return (
-    <section className="relative border-y border-moss bg-forest/50 py-20">
+    <section
+      id="resources"
+      className="relative scroll-mt-20 border-y border-moss bg-forest/50 py-20"
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <SectionLabel className="justify-center">Free Resources</SectionLabel>

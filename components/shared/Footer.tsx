@@ -47,6 +47,7 @@ export function Footer() {
         <FooterCol title="Quick Links">
           <FooterLink href="/courses">Courses</FooterLink>
           <FooterLink href="/free-tools/neet-predictor">Free Tools</FooterLink>
+          <FooterLink href="/#resources">Free Resources</FooterLink>
           <FooterLink href="/results">Results</FooterLink>
           <FooterLink href="/mentor-connect">Mentor Connect</FooterLink>
           <FooterLink href="/about">About</FooterLink>

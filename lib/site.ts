@@ -42,6 +42,7 @@ export function whatsappLink(message?: string): string {
 export const navLinks = [
   { label: "Courses", href: "/courses" },
   { label: "Free Tools", href: "/free-tools/neet-predictor" },
+  { label: "Free Resources", href: "/#resources" },
   { label: "Results", href: "/results" },
   { label: "Mentor Connect", href: "/mentor-connect" },
   { label: "About", href: "/about" },

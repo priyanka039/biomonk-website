@@ -13,10 +13,10 @@
        cream     → deepest violet — headings & primary text
        parchment → muted violet — body copy
        muted     → faint violet-grey — captions/footnotes            */
-  --color-white: #ffffff;
-  --color-ink: #ffffff;
-  --color-forest: #f7f1fd;
-  --color-moss: #e9dcf7;
+  --color-white: #ffffff; /* kept pure — cards/surfaces pop on the tinted page */
+  --color-ink: #f6f3fc; /* base/page background — soft violet-white (not stark) */
+  --color-forest: #ece4fa; /* deeper lavender — tinted section bands & surfaces */
+  --color-moss: #e3d6f6;
   --color-sage: #a675ca; /* light purple highlight */
   --color-gold: #5a009d; /* primary */
   --color-amber: #9800e6; /* bright accent */
@@ -31,6 +31,7 @@
 
   /* ── Easing ── */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-mist: cubic-bezier(0.45, 0, 0.55, 1); /* symmetric — smooth, even drift */
 }
 
 :root {
@@ -96,7 +97,7 @@ body::before {
   }
 
   .glass-nav {
-    background: rgba(255, 255, 255, 0.78);
+    background: rgba(249, 247, 253, 0.82);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
   }
@@ -115,6 +116,66 @@ body::before {
   .ring-gold-focus:focus-visible {
     outline: none;
     box-shadow: 0 0 0 3px rgba(90, 0, 157, 0.45);
+  }
+
+  /* ── Drifting lavender mist (background ambience) ──
+     Design rule: a *balanced ambient field* of constant luminance.
+       • One blob anchored per viewport quadrant → even coverage everywhere.
+       • Uniform size + fixed per-blob opacity → no region reads heavier.
+       • Only position/scale drift animates (never opacity) → the overall
+         mist density stays steady; it moves but never pulses brighter/dimmer.
+       • Shared easing + staggered phases → reads as one cohesive field.   */
+  .mist {
+    position: absolute;
+    width: 44vw;
+    height: 44vw;
+    border-radius: 9999px;
+    filter: blur(80px);
+    will-change: transform;
+  }
+  /* top-left quadrant */
+  .mist-1 {
+    top: -6vh;
+    left: -4vw;
+    background: radial-gradient(
+      circle,
+      rgba(152, 0, 230, 0.16) 0%,
+      transparent 70%
+    );
+    animation: mist-drift 36s var(--ease-mist) infinite alternate;
+  }
+  /* top-right quadrant */
+  .mist-2 {
+    top: -4vh;
+    right: -4vw;
+    background: radial-gradient(
+      circle,
+      rgba(122, 0, 196, 0.16) 0%,
+      transparent 70%
+    );
+    animation: mist-drift 40s var(--ease-mist) -8s infinite alternate-reverse;
+  }
+  /* bottom-left quadrant */
+  .mist-3 {
+    bottom: -6vh;
+    left: -2vw;
+    background: radial-gradient(
+      circle,
+      rgba(90, 0, 157, 0.15) 0%,
+      transparent 70%
+    );
+    animation: mist-drift 44s var(--ease-mist) -16s infinite alternate-reverse;
+  }
+  /* bottom-right quadrant */
+  .mist-4 {
+    bottom: -4vh;
+    right: -2vw;
+    background: radial-gradient(
+      circle,
+      rgba(166, 117, 202, 0.16) 0%,
+      transparent 70%
+    );
+    animation: mist-drift 48s var(--ease-mist) -24s infinite alternate;
   }
 
   .hero-glow::before {
@@ -145,6 +206,18 @@ body::before {
 }
 .animate-marquee {
   animation: marquee 32s linear infinite;
+}
+
+/* Single shared drift: gentle position + scale only (no opacity change),
+   so the overall mist luminance stays constant. Per-blob direction is
+   varied via alternate / alternate-reverse + staggered delays above. */
+@keyframes mist-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(6vw, 5vh, 0) scale(1.08);
+  }
 }
 
 @keyframes pulse-ring {
