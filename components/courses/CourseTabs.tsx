@@ -132,8 +132,8 @@ function Faculty() {
         </h3>
         <p className="text-sm text-amber">Founder &amp; Lead Mentor · BioMonk</p>
         <p className="mt-3 text-sm leading-relaxed text-parchment/80">
-          16+ years mentoring NEET Biology aspirants. Ex-FIITJEE, Ex-Aakash,
-          Ex-Allen, Ex-PhysicsWallah. Masters in Zoology. Known for an
+          16+ years mentoring NEET Biology aspirants. Ex-Aakash, Ex-Allen,
+          Ex-PhysicsWallah. Masters in Zoology. Known for an
           NCERT-first, rank-oriented teaching style that has produced multiple
           AIR toppers.
         </p>

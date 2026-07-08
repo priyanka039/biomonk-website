@@ -66,8 +66,12 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${fraunces.variable} ${dmSans.variable} ${dmMono.variable} h-full`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-ink text-cream">
+      <body
+        className="min-h-full flex flex-col bg-ink text-cream"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>

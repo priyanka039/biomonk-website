@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { navLinks } from "@/lib/site";
 import { Logo } from "./SectionLabel";
 
-export function Navbar() {
+export function Navbar({ lmsUrl }: { lmsUrl?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -53,7 +53,7 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <Link
-            href="/dashboard"
+            href={lmsUrl || "/dashboard"}
             className="text-sm font-medium text-parchment/80 transition-colors hover:text-cream"
           >
             Login
@@ -101,7 +101,7 @@ export function Navbar() {
               </Link>
             ))}
             <Link
-              href="/dashboard"
+              href={lmsUrl || "/dashboard"}
               onClick={() => setMenuOpen(false)}
               className="border-b border-moss/60 py-4 font-display text-2xl text-cream"
             >

@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { CalendarClock, TrendingUp } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
-const TARGET = new Date(`${siteConfig.neetDate}T00:00:00`).getTime();
-
 interface TimeLeft {
   days: number;
   hours: number;
@@ -13,8 +11,8 @@ interface TimeLeft {
   seconds: number;
 }
 
-function getTimeLeft(): TimeLeft {
-  const diff = Math.max(0, TARGET - Date.now());
+function getTimeLeft(targetMs: number): TimeLeft {
+  const diff = Math.max(0, targetMs - Date.now());
   return {
     days: Math.floor(diff / 86_400_000),
     hours: Math.floor((diff / 3_600_000) % 24),
@@ -30,15 +28,18 @@ function paceMultiplier(daysNow: number, waitDays: number): string {
   return `${(daysNow / later).toFixed(1)}×`;
 }
 
-export function NeetCountdown() {
+export function NeetCountdown({ neetDate }: { neetDate?: string }) {
+  const date = neetDate ?? siteConfig.neetDate;
+  const targetMs = new Date(`${date}T00:00:00`).getTime();
+
   // Render numbers only after mount so SSR/client can't disagree on the date.
   const [t, setT] = useState<TimeLeft | null>(null);
 
   useEffect(() => {
-    setT(getTimeLeft());
-    const id = setInterval(() => setT(getTimeLeft()), 1000);
+    setT(getTimeLeft(targetMs));
+    const id = setInterval(() => setT(getTimeLeft(targetMs)), 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [targetMs]);
 
   const daysNow = t?.days ?? 0;
   const pace = [
@@ -99,7 +100,7 @@ export function NeetCountdown() {
         </div>
         <p className="relative mt-3 text-center text-xs text-white/50">
           Until NEET{" "}
-          {new Date(TARGET).toLocaleDateString("en-IN", {
+          {new Date(targetMs).toLocaleDateString("en-IN", {
             day: "numeric",
             month: "long",
             year: "numeric",

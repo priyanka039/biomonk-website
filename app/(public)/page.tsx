@@ -14,8 +14,16 @@ import { VickyStory } from "@/components/landing/VickyStory";
 import { MentorConnectTeaser } from "@/components/landing/MentorConnectTeaser";
 import { FaqAccordion } from "@/components/landing/FaqAccordion";
 import { FinalCta } from "@/components/landing/FinalCta";
+import { getCourses, getToppers, getFaqs, getSiteSettings } from "@/lib/cms";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [courses, toppers, faqs, settings] = await Promise.all([
+    getCourses(),
+    getToppers(),
+    getFaqs(),
+    getSiteSettings(),
+  ]);
+
   return (
     <>
       <Hero />
@@ -25,14 +33,14 @@ export default function HomePage() {
       <FreeVsPaid />
       <Comparison />
       <Resources />
-      <FeaturedCourses />
-      <NeetCountdown />
+      <FeaturedCourses courses={courses} />
+      <NeetCountdown neetDate={settings.neetDate} />
       <PredictorCtaBand />
-      <HallOfFame limit={6} showViewAll heading="Your seniors did it here" />
+      <HallOfFame limit={6} showViewAll heading="Your seniors did it here" toppers={toppers} />
       <WhatsAppWall />
       <VickyStory />
-      <MentorConnectTeaser />
-      <FaqAccordion />
+      <MentorConnectTeaser seatsLeft={settings.mentorSeatsLeft} />
+      <FaqAccordion faqs={faqs} />
       <FinalCta />
     </>
   );

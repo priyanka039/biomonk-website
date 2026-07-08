@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { CourseGrid } from "@/components/courses/CourseGrid";
+import { getCourses } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "NEET Biology Courses — Dropper, Class 12 & Crash Course",
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/courses" },
 };
 
-export default function CoursesPage() {
+export default async function CoursesPage() {
+  const courses = await getCourses();
+
   return (
     <div className="mx-auto max-w-7xl px-5 py-14 sm:px-8">
       <SectionLabel>Courses</SectionLabel>
@@ -22,7 +25,7 @@ export default function CoursesPage() {
       </p>
 
       <div className="mt-10">
-        <CourseGrid />
+        <CourseGrid courses={courses} />
       </div>
     </div>
   );

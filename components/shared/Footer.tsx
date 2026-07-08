@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { Mail, Phone, MapPin, ShieldCheck } from "lucide-react";
-import { siteConfig, whatsappLink } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
+import type { ContactRow } from "@/lib/cms";
+import type { SiteStats } from "@/lib/cms";
+import {
+  contactValue,
+  whatsappLinkFromContacts,
+} from "@/lib/contacts-helpers";
 import { Logo } from "./SectionLabel";
 
 function YoutubeIcon() {
@@ -19,24 +25,37 @@ function InstagramIcon() {
   );
 }
 
-export function Footer() {
+export function Footer({
+  contacts = [],
+  stats,
+}: {
+  contacts?: ContactRow[];
+  stats?: SiteStats;
+}) {
+  const years = stats?.years ?? siteConfig.stats.years;
+  const email = contactValue(contacts, "email") || siteConfig.email;
+  const phone = contactValue(contacts, "phone") || siteConfig.phoneDisplay;
+  const youtube = contactValue(contacts, "youtube") || siteConfig.socials.youtube;
+  const instagram = contactValue(contacts, "instagram") || siteConfig.socials.instagram;
+  const waLink = whatsappLinkFromContacts(contacts);
+
   return (
     <footer className="border-t border-moss/60 bg-forest/40">
       <div className="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <Logo />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-parchment/70">
-            NEET Biology, taught personally by {siteConfig.mentor}. 16+ years of
+            NEET Biology, taught personally by {siteConfig.mentor}. {years} years of
             mentorship — now online, for everyone.
           </p>
           <div className="mt-5 flex gap-3">
-            <SocialIcon href={siteConfig.socials.youtube} label="YouTube">
+            <SocialIcon href={youtube} label="YouTube">
               <YoutubeIcon />
             </SocialIcon>
-            <SocialIcon href={siteConfig.socials.instagram} label="Instagram">
+            <SocialIcon href={instagram} label="Instagram">
               <InstagramIcon />
             </SocialIcon>
-            <SocialIcon href={whatsappLink()} label="WhatsApp">
+            <SocialIcon href={waLink} label="WhatsApp">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden>
                 <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z" />
               </svg>
@@ -55,17 +74,17 @@ export function Footer() {
 
         <FooterCol title="Contact">
           <li className="flex items-center gap-2 text-sm text-parchment/70">
-            <Mail size={15} className="text-gold" /> {siteConfig.email}
+            <Mail size={15} className="text-gold" /> {email}
           </li>
           <li className="flex items-center gap-2 text-sm text-parchment/70">
-            <Phone size={15} className="text-gold" /> {siteConfig.phoneDisplay}
+            <Phone size={15} className="text-gold" /> {phone}
           </li>
           <li className="flex items-center gap-2 text-sm text-parchment/70">
             <MapPin size={15} className="text-gold" /> {siteConfig.location}
           </li>
           <li>
             <a
-              href={whatsappLink()}
+              href={waLink}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-1 inline-flex text-sm font-medium text-[#25D366] hover:underline"

@@ -3,7 +3,7 @@ import { SectionLabel } from "@/components/shared/SectionLabel";
 import { CtaButton } from "@/components/shared/CtaButton";
 
 const TIMELINE = [
-  { year: "2006", label: "FIITJEE" },
+  { year: "2006", label: "Teaching career" },
   { year: "2011", label: "Aakash" },
   { year: "2015", label: "Allen" },
   { year: "2021", label: "PW" },
@@ -43,9 +43,9 @@ export function VickyStory() {
 
           <div className="mt-5 space-y-4 text-parchment/80">
             <p>
-              Vicky Vaswani started teaching at FIITJEE in 2006. Over the next
-              decade and a half, he helped build Aakash and Allen Bengaluru from
-              the ground up, and taught online at PhysicsWallah.
+              Vicky Vaswani began teaching in 2006. Over the next decade and a
+              half, he helped build Aakash and Allen Bengaluru from the ground
+              up, and taught online at PhysicsWallah.
             </p>
             <p>
               In 2022 he left the big institutes for a simple reason: to mentor

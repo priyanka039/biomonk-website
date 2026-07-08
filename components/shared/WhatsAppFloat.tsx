@@ -1,11 +1,16 @@
-import { siteConfig, whatsappLink } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
+import type { ContactRow } from "@/lib/cms";
+import { whatsappLinkFromContacts } from "@/lib/contacts-helpers";
 
-export function WhatsAppFloat() {
+export function WhatsAppFloat({ contacts = [] }: { contacts?: ContactRow[] }) {
+  const href = whatsappLinkFromContacts(
+    contacts,
+    "Hi Vicky Sir! I found BioMonk online and want to know more about NEET Biology coaching."
+  );
+
   return (
     <a
-      href={whatsappLink(
-        "Hi Vicky Sir! I found BioMonk online and want to know more about NEET Biology coaching."
-      )}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Chat with ${siteConfig.name} on WhatsApp`}

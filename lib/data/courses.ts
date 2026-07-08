@@ -27,6 +27,10 @@ export interface Course {
   highlights: string[];
   whatsIncluded: string[];
   curriculum: Chapter[];
+  /** Public storage path for course card cover (CMS). */
+  imagePath?: string;
+  /** Resolved URL for display. */
+  imageUrl?: string;
 }
 
 export const COURSES: Course[] = [

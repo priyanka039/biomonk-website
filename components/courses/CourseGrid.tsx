@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 import { CourseCard } from "@/components/shared/CourseCard";
+import type { Course } from "@/lib/data/courses";
 import { COURSES, COURSE_FILTERS } from "@/lib/data/courses";
 import { cn } from "@/lib/utils";
 
-export function CourseGrid() {
+export function CourseGrid({ courses = COURSES }: { courses?: Course[] }) {
   const [filter, setFilter] = useState("all");
   const shown =
     filter === "all"
-      ? COURSES
-      : COURSES.filter((c) => c.category === filter);
+      ? courses
+      : courses.filter((c) => c.category === filter);
 
   return (
     <>

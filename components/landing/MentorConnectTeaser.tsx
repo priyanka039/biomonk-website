@@ -9,13 +9,18 @@ const SERVICES = [
   { icon: CalendarClock, text: "Admission process walkthrough" },
 ];
 
-export function MentorConnectTeaser() {
+export function MentorConnectTeaser({ seatsLeft }: { seatsLeft?: number }) {
   return (
     <section className="px-5 py-16 sm:px-8">
       <div className="mx-auto max-w-6xl rounded-3xl border border-sage/40 bg-moss/50 p-8 sm:p-12">
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <SectionLabel>Mentor Connect</SectionLabel>
+            {seatsLeft != null && seatsLeft > 0 && (
+              <p className="mt-3 text-sm font-medium text-amber">
+                {seatsLeft} guidance slots open this month
+              </p>
+            )}
             <h2 className="mt-4 font-display text-4xl font-semibold tracking-tight text-cream sm:text-5xl text-balance">
               Don&apos;t Know Which College to Choose?
             </h2>

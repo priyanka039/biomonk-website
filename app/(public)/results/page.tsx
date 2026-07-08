@@ -3,6 +3,8 @@ import { PlayCircle } from "lucide-react";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { HallOfFame } from "@/components/landing/HallOfFame";
 import { CtaButton } from "@/components/shared/CtaButton";
+import { getSiteSettings, getContacts, getToppers } from "@/lib/cms";
+import { contactValue } from "@/lib/contacts-helpers";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,14 +14,23 @@ export const metadata: Metadata = {
   alternates: { canonical: "/results" },
 };
 
-const STATS = [
-  { value: "847", label: "Students Mentored" },
-  { value: "23", label: "AIR Top-100" },
-  { value: "6", label: "AIIMS Selections" },
-  { value: siteConfig.stats.years, label: "Years of Mentorship" },
-];
+export default async function ResultsPage() {
+  const [settings, contacts, toppers] = await Promise.all([
+    getSiteSettings(),
+    getContacts(),
+    getToppers(),
+  ]);
 
-export default function ResultsPage() {
+  const youtube =
+    contactValue(contacts, "youtube") || siteConfig.socials.youtube;
+
+  const STATS = [
+    { value: settings.stats.students, label: "Students Mentored" },
+    { value: settings.stats.toppers, label: "AIR Top-100" },
+    { value: settings.stats.aiimsSelections, label: "AIIMS Selections" },
+    { value: settings.stats.years, label: "Years of Mentorship" },
+  ];
+
   return (
     <div>
       <div className="mx-auto max-w-7xl px-5 pt-14 sm:px-8">
@@ -49,9 +60,8 @@ export default function ResultsPage() {
         </div>
       </div>
 
-      <HallOfFame heading="Our toppers, by the year" />
+      <HallOfFame heading="Our toppers, by the year" toppers={toppers} />
 
-      {/* Video testimonials */}
       <section className="mx-auto max-w-7xl px-5 pb-8 sm:px-8">
         <SectionLabel>Video Stories</SectionLabel>
         <h2 className="mt-4 font-display text-3xl font-semibold text-cream sm:text-4xl">
@@ -61,7 +71,7 @@ export default function ResultsPage() {
           {[1, 2, 3].map((i) => (
             <a
               key={i}
-              href={siteConfig.socials.youtube}
+              href={youtube}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex aspect-video items-center justify-center rounded-2xl border border-moss bg-gradient-to-br from-moss/50 via-forest to-ink"

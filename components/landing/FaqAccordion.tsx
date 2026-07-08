@@ -5,7 +5,11 @@ import { Plus, Minus } from "lucide-react";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { FAQS } from "@/lib/data/faq";
 
-export function FaqAccordion() {
+export function FaqAccordion({
+  faqs = FAQS,
+}: {
+  faqs?: { q: string; a: string; id?: string }[];
+}) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -18,10 +22,10 @@ export function FaqAccordion() {
       </div>
 
       <div className="mt-10 divide-y divide-moss/60 rounded-2xl border border-moss bg-forest/40">
-        {FAQS.map((item, i) => {
+        {faqs.map((item, i) => {
           const isOpen = open === i;
           return (
-            <div key={i}>
+            <div key={item.id ?? i}>
               <button
                 onClick={() => setOpen(isOpen ? null : i)}
                 className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left ring-gold-focus"

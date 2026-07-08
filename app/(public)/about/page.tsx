@@ -3,11 +3,13 @@ import Image from "next/image";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { CtaButton } from "@/components/shared/CtaButton";
 import { whatsappLink } from "@/lib/site";
+import { getSection } from "@/lib/cms";
+import { SECTION_KEYS } from "@/lib/cms/keys";
 
 export const metadata: Metadata = {
   title: "About Vicky Vaswani — 16 Years of NEET Biology Mentorship",
   description:
-    "From FIITJEE to Aakash, Allen and PhysicsWallah — and finally BioMonk. The story of why Vicky Vaswani left the big institutes to mentor NEET students directly.",
+    "From Aakash and Allen to PhysicsWallah — and finally BioMonk. The story of why Vicky Vaswani left the big institutes to mentor NEET students directly.",
   alternates: { canonical: "/about" },
 };
 
@@ -19,7 +21,7 @@ const TIMELINE = [
   },
   {
     period: "2006",
-    title: "Joined FIITJEE",
+    title: "Started teaching career",
     desc: "Centre Head & Faculty — the start of a teaching career.",
   },
   {
@@ -50,7 +52,12 @@ const SOCIAL = [
   { value: "10,000+", label: "WhatsApp Community" },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const section = await getSection<{ items?: typeof TIMELINE }>(
+    SECTION_KEYS.ABOUT_TIMELINE
+  );
+  const timeline = section?.items?.length ? section.items : TIMELINE;
+
   return (
     <div className="mx-auto max-w-5xl px-5 py-14 sm:px-8">
       <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.8fr]">
@@ -92,7 +99,7 @@ export default function AboutPage() {
       <div className="mt-16">
         <SectionLabel>The Journey</SectionLabel>
         <ol className="relative mt-8 border-l border-moss pl-8">
-          {TIMELINE.map((t) => (
+          {timeline.map((t) => (
             <li key={t.period} className="relative pb-9 last:pb-0">
               <span className="absolute -left-[2.6rem] flex h-5 w-5 items-center justify-center rounded-full border-2 border-gold bg-ink">
                 <span className="h-1.5 w-1.5 rounded-full bg-gold" />

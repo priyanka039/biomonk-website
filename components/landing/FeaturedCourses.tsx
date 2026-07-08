@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { CourseCard } from "@/components/shared/CourseCard";
+import type { Course } from "@/lib/data/courses";
 import { COURSES } from "@/lib/data/courses";
 
-export function FeaturedCourses() {
+export function FeaturedCourses({ courses = COURSES }: { courses?: Course[] }) {
   return (
     <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
@@ -22,7 +23,7 @@ export function FeaturedCourses() {
       </div>
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {COURSES.map((course) => (
+        {courses.map((course) => (
           <CourseCard key={course.slug} course={course} />
         ))}
       </div>

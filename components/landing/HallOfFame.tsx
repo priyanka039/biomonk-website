@@ -4,21 +4,31 @@ import { useState } from "react";
 import Link from "next/link";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { TopperCard } from "@/components/shared/TopperCard";
-import { TOPPERS, RESULT_YEARS } from "@/lib/data/results";
+import type { TopperResult } from "@/lib/data/results";
+import { TOPPERS } from "@/lib/data/results";
 import { cn } from "@/lib/utils";
 
 export function HallOfFame({
   limit,
   showViewAll = false,
   heading = "Your seniors did it here",
+  toppers = TOPPERS,
 }: {
   limit?: number;
   showViewAll?: boolean;
   heading?: string;
+  toppers?: TopperResult[];
 }) {
   const [year, setYear] = useState("All Years");
 
-  const filtered = TOPPERS.filter(
+  const years = [
+    "All Years",
+    ...Array.from(new Set(toppers.map((t) => String(t.year)))).sort(
+      (a, b) => Number(b) - Number(a)
+    ),
+  ];
+
+  const filtered = toppers.filter(
     (t) => year === "All Years" || String(t.year) === year
   );
   const shown = limit ? filtered.slice(0, limit) : filtered;
@@ -33,7 +43,7 @@ export function HallOfFame({
       </div>
 
       <div className="mt-8 flex flex-wrap justify-center gap-2">
-        {RESULT_YEARS.map((y) => (
+        {years.map((y) => (
           <button
             key={y}
             onClick={() => setYear(y)}

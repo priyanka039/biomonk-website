@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Star, Users, Clock } from "lucide-react";
 import type { Course } from "@/lib/data/courses";
 import { formatINR } from "@/lib/utils";
@@ -13,16 +14,28 @@ export function CourseCard({ course }: { course: Course }) {
       href={`/courses/${course.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-moss bg-forest transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-[0_20px_50px_-20px_rgba(90,0,157,0.4)]"
     >
-      <div className="relative flex h-40 items-center justify-center overflow-hidden bg-gradient-to-br from-sage/30 via-forest to-moss">
-        <span className="font-display text-5xl font-semibold gold-text opacity-40">
-          Bio
-        </span>
+      <div className="relative h-40 overflow-hidden bg-gradient-to-br from-sage/30 via-forest to-moss">
+        {course.imageUrl ? (
+          <Image
+            src={course.imageUrl}
+            alt={course.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <span className="font-display text-5xl font-semibold gold-text opacity-40">
+              Bio
+            </span>
+          </div>
+        )}
         {course.badge && (
-          <span className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-white">
+          <span className="absolute left-3 top-3 z-10 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-white">
             {course.badge}
           </span>
         )}
-        <span className="absolute right-3 top-3 rounded-full border border-moss bg-white/85 px-2.5 py-1 text-xs font-medium text-gold backdrop-blur">
+        <span className="absolute right-3 top-3 z-10 rounded-full border border-moss bg-white/85 px-2.5 py-1 text-xs font-medium text-gold backdrop-blur">
           {course.categoryLabel}
         </span>
       </div>
