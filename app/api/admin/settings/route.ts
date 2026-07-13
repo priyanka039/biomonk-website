@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/auth/admin";
+import { revalidatePublicSite } from "@/lib/cms/revalidate";
 import { logger } from "@/lib/logger";
 import { z } from "zod";
 import { zodErrorResponse } from "@/lib/validation/errors";
@@ -87,5 +88,6 @@ export async function PUT(req: Request) {
   }
 
   logger.info("settings updated", { userId: user.id });
+  revalidatePublicSite();
   return NextResponse.json({ ok: true, data: result.data });
 }

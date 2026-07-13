@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/auth/admin";
+import { revalidatePublicSite } from "@/lib/cms/revalidate";
 import { z } from "zod";
 import { zodErrorResponse } from "@/lib/validation/errors";
 
@@ -62,6 +63,7 @@ export async function POST(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, errors: [error.message] }, { status: 500 });
   }
+  revalidatePublicSite();
   return NextResponse.json({ ok: true, data });
 }
 
@@ -97,6 +99,7 @@ export async function PUT(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, errors: [error.message] }, { status: 500 });
   }
+  revalidatePublicSite();
   return NextResponse.json({ ok: true, data });
 }
 
@@ -118,5 +121,6 @@ export async function DELETE(req: Request) {
   if (error) {
     return NextResponse.json({ ok: false, errors: [error.message] }, { status: 500 });
   }
+  revalidatePublicSite();
   return NextResponse.json({ ok: true });
 }

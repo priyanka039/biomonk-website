@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getServiceClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/auth/admin";
+import { revalidatePublicSite } from "@/lib/cms/revalidate";
 import { logger } from "@/lib/logger";
 import { z } from "zod";
 import { zodErrorResponse } from "@/lib/validation/errors";
@@ -68,6 +69,7 @@ export async function POST(req: Request) {
   }
 
   logger.info("resource created", { userId: user.id, id: data.id });
+  revalidatePublicSite();
   return NextResponse.json({ ok: true, data });
 }
 
@@ -111,6 +113,7 @@ export async function PUT(req: Request) {
     return NextResponse.json({ ok: false, errors: [error.message] }, { status: 500 });
   }
 
+  revalidatePublicSite();
   return NextResponse.json({ ok: true, data });
 }
 
@@ -145,5 +148,6 @@ export async function DELETE(req: Request) {
     logger.info("storage file deleted", { filePath: row.file_path });
   }
 
+  revalidatePublicSite();
   return NextResponse.json({ ok: true });
 }

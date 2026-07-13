@@ -16,6 +16,9 @@ import { FaqAccordion } from "@/components/landing/FaqAccordion";
 import { FinalCta } from "@/components/landing/FinalCta";
 import { getCourses, getToppers, getFaqs, getSiteSettings } from "@/lib/cms";
 
+/** Refresh homepage CMS data at least every 60s if on-demand revalidation is missed. */
+export const revalidate = 60;
+
 export default async function HomePage() {
   const [courses, toppers, faqs, settings] = await Promise.all([
     getCourses(),
